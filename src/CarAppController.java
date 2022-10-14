@@ -1,5 +1,4 @@
 
-
 import java.net.URL;
 import java.text.NumberFormat;
 import java.util.Locale;
@@ -71,11 +70,12 @@ public class CarAppController implements Initializable {
     public double price2 = 0;
     public double finalPrice = 0;
 
+    // This method runs when the checkboxes on the Interface are selected
     @FXML
     void handleButton(ActionEvent event) {
         NumberFormat nf = NumberFormat.getCurrencyInstance(Locale.US);
         double tempPrice = 0;
-        if (powerWindows.isSelected()) {
+        if (powerWindows.isSelected()) { // Adds price if any of these values are selected
             tempPrice += 5000;
         }
 
@@ -97,21 +97,23 @@ public class CarAppController implements Initializable {
 
         price1 = tempPrice;
 
-        totalPrice.setText(nf.format(price + price1 + price2 * (price + price1)));
+        totalPrice.setText(nf.format(price + price1 + price2 * (price + price1))); // computing and displaying the final
+                                                                                   // price at the bottom of the screen
 
     }
 
-
+    // If the exit button is pressed this method exits the application
     @FXML
     void exitApp(ActionEvent event) {
         System.exit(0);
     }
 
+    // This method is called on start up and sets up the original interace displated
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
         NumberFormat nf = NumberFormat.getCurrencyInstance(Locale.US);
-        String[] items = {"Toyota", "Lamborghini", "Ferrari"};
+        String[] items = { "Toyota", "Lamborghini", "Ferrari" };
 
         ObservableList<String> list = FXCollections.observableArrayList(items);
         carType.setItems(list);
@@ -119,20 +121,22 @@ public class CarAppController implements Initializable {
         ChangeListener listener = new MyChangeListener();
         carType.valueProperty().addListener(listener);
 
-        String[] colors1 = {"Grey", "Red"};
-        ObservableList<String> colorSelector1 = FXCollections.observableArrayList(colors1);
+        String[] colors1 = { "Grey", "Red" };
+        ObservableList<String> colorSelector1 = FXCollections.observableArrayList(colors1); // Setting up the drop down menu
         colorSelector.setItems(colorSelector1);
-        colorSelector.getSelectionModel().selectFirst();
+        colorSelector.getSelectionModel().selectFirst(); // Selecting Automatic first color
         powerLocks.setDisable(true);
         price = 30000;
         totalPrice.setText(nf.format(price));
 
+        // Assigning the images in teh resources folder to variables
         ferrariImage = new Image(getClass().getResourceAsStream("/resources/images/ferrari.jpg"));
         lamboImage = new Image(getClass().getResourceAsStream("/resources/images/lambo.jpg"));
         toyotaImage = new Image(getClass().getResourceAsStream("/resources/images/toyota.jpg"));
 
         carView.setImage(toyotaImage);
 
+        // Initializing all of the descriptions
         toyotaDescription = "Toyota has car models that offer something for everyone. Whether you’re looking "
                 + "for a compact car for commuting to work, a fun sports car, or a "
                 + "family vehicle to safely transport your loved ones wherever they need to go, you can rely on Toyota. ";
@@ -152,21 +156,26 @@ public class CarAppController implements Initializable {
 
     }
 
+    //Class that adds a listner to the drop down selections in the interface
     private class MyChangeListener implements ChangeListener {
 
+        // Changes the Interface if a different slection in the drop down menu is selected
         @Override
         public void changed(ObservableValue observable, Object oldValue, Object newValue) {
             NumberFormat nf = NumberFormat.getCurrencyInstance(Locale.US);
-            String newValue2 = (String) newValue;
-            String[] colors3 = {"Silver", "Black"};
+
+            // Adding color options to each car
+            String newValue2 = (String) newValue; // This variable holds the value selected
+            String[] colors3 = { "Silver", "Black" };
             ObservableList<String> colorSelector3 = FXCollections.observableArrayList(colors3);
-            String[] colors2 = {"Blue", "Pink"};
+            String[] colors2 = { "Blue", "Pink" };
             ObservableList<String> colorSelector2 = FXCollections.observableArrayList(colors2);
-            String[] colors1 = {"Grey", "Red"};
+            String[] colors1 = { "Grey", "Red" };
             ObservableList<String> colorSelector1 = FXCollections.observableArrayList(colors1);
 
             double tempPrice = 0;
 
+            // Chaning things in the interface if toyota is selected
             if (newValue2.equals("Toyota")) {
                 colorSelector.setItems(colorSelector1);
                 colorSelector.getSelectionModel().selectFirst();
@@ -185,6 +194,7 @@ public class CarAppController implements Initializable {
 
             }
 
+            // Chaning things in the interface if Lamborghini is selected
             if (newValue2.equals("Lamborghini")) {
 
                 colorSelector.setItems(colorSelector2);
@@ -204,6 +214,7 @@ public class CarAppController implements Initializable {
 
             }
 
+            // Chaning things in the interface if Ferrari is selected
             if (newValue2.equals("Ferrari")) {
                 colorSelector.setItems(colorSelector3);
                 colorSelector.getSelectionModel().selectFirst();
@@ -221,10 +232,6 @@ public class CarAppController implements Initializable {
                 none.setSelected(true);
 
             }
-            if (powerWindows.isSelected()) {
-                tempPrice += 20;
-            }
-
             price = tempPrice;
 
             totalPrice.setText(nf.format(price + price1 + price2 * (price + price1)));
