@@ -1,18 +1,11 @@
-## Getting Started
+# Car API
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+## OVERVIEW
+This program uses Scene Builder, Java, and JavaFX to create an interactive interface displaying a car along with various options that a user can click on to change the price, image, and description in the API.
 
-## Folder Structure
 
-The workspace contains two folders by default, where:
+### How to Run
+User can click the different interactive buttons on the API when running the class called CarApp.java
 
-- `src`: the folder to maintain sources
-- `lib`: the folder to maintain dependencies
-
-Meanwhile, the compiled output files will be generated in the `bin` folder by default.
-
-> If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
-
-## Dependency Management
-
-The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
+### Software
+The user will need to install JavaFX and its corresponding libraries along with Java 16 or higher.
